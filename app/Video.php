@@ -17,4 +17,10 @@ class Video extends Model
     {
         return $this->hasMany('App\Comment');
     }
+
+    public function scopeSearch($query, $option){
+        if (trim($option) != '') {
+            return $query->where('title', 'like', '%'.$option.'%');
+        }
+    }
 }

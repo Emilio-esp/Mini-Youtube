@@ -15,9 +15,9 @@ use App\Comment;
 class VideoController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $videos = Video::paginate(12);
+        $videos = Video::search($request->search)->paginate(12);
 
         return view('videos.video-home', compact('videos'));
 
@@ -84,7 +84,7 @@ class VideoController extends Controller
     public function playVideo($video_id)
     {
         $video = Video::findOrFail($video_id);
-        $moreVideos = Video::all();
+        $moreVideos = Video::paginate(15)->whereNotIn('id', $video_id);
         $comments = Comment::where('video_id', $video->id)->get();
 
         return view('videos.video-play', compact('video', 'comments', 'moreVideos'));

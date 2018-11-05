@@ -37,10 +37,10 @@
                 </div>
                 
                 <div class="navbar-header ">
-                    <form action="#">
+                    <form action="{{url('/')}}" method="GET">
                         <div class="navbar-brand search-box">
-                            <input class="input-padding" type="text" placeholder="Buscar">
-                            <button class="btn btn-default">
+                            <input name="search" class="input-padding" type="text" placeholder="Buscar">
+                            <button class="btn btn-default" type="submit">
                                 <span class="fa fa-search"></span>
                             </button>
                         </div>
