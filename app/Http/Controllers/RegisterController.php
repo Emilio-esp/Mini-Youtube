@@ -18,8 +18,6 @@ class RegisterController extends Controller
     
     public function store(Request $request)
     {
-        // dd($request->all());
-
         $user = new User();
 
         $user->name = $request->name;
@@ -34,6 +32,10 @@ class RegisterController extends Controller
             Storage::disk('avatars')->put($avatar_path, File::get($request->file('avatar')));
 
             $user->avatar = $avatar_path;
+        }else{
+            $faker = \Faker\Factory::create();
+
+            $user->avatar = $faker->hexcolor;
         }
 
         $user->save();

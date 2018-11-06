@@ -47,6 +47,14 @@
                     <div class="new-comment">
                         <div class="avatar-container">
                             <div>
+                                @if($video->user()->get()->all()[0]->avatar[0] == '#')
+                                <div 
+                                    class="img-avatar-letter" 
+                                    style="background-color:{{$video->user()->get()->all()[0]->avatar}};"
+                                >
+                                    <p>{{str_limit(Auth::user()->username,1,'')}}</p>
+                                </div>
+                                @else
                                 <img 
                                     class="img-avatar"
                                     src="{{route('get.avatar', $video->user()->get()->all()[0]->avatar)}}" 
@@ -54,6 +62,7 @@
                                     height="48"
                                     alt="{{$video->user()->get()->all()[0]->avatar}}"
                                 >
+                                @endif
                             </div>
                             <div class="text-info">
                                 <strong class="text-username">{{$video->user()->get()->all()[0]->username}}</strong><br>
@@ -66,19 +75,22 @@
                         @if(!Auth::guest())
                         <div class="avatar-container">
                             <div>
-                                    @if( Auth::user()->avatar != null)
-                                    <img 
-                                        class="img-avatar"
-                                        src="{{route('get.avatar', Auth::user()->avatar)}}" 
-                                        width="48"
-                                        height="48"
-                                        alt="{{$video->user()->get()->all()[0]->avatar}}"
-                                    >
-                                    @else
-                                    <div class="img-avatar-letter">
-                                        <p>{{str_limit(Auth::user()->username,1,'')}}</p>
-                                    </div>    
-                                    @endif
+                                @if( Auth::user()->avatar[0] == '#' )
+                                <div 
+                                    class="img-avatar-letter"
+                                    style="background-color:{{Auth::user()->avatar}};"
+                                >
+                                    <p>{{str_limit(Auth::user()->username,1,'')}}</p>
+                                </div>    
+                                @else
+                                <img 
+                                    class="img-avatar"
+                                    src="{{route('get.avatar', Auth::user()->avatar)}}" 
+                                    width="48"
+                                    height="48"
+                                    alt="{{$video->user()->get()->all()[0]->avatar}}"
+                                >
+                                @endif
                             </div>
                             <div class="do-comment">
                                 <form action="{{route('create.comment')}}" method="POST">
@@ -101,7 +113,7 @@
                         @forelse($comments as $comment)
                             <div class="avatar-container">
                                 <div>
-                                    @if( $comment->user()->get()->all()[0]->avatar != null)
+                                    @if( $comment->user()->get()->all()[0]->avatar[0] != '#')
                                     <img 
                                         class="img-avatar"
                                         src="{{route('get.avatar', $comment->user()->get()->all()[0]->avatar)}}" 
@@ -110,7 +122,10 @@
                                         alt="{{$comment->user()->get()->all()[0]->avatar}}"
                                     >
                                     @else
-                                    <div class="img-avatar-letter">
+                                    <div 
+                                        class="img-avatar-letter"
+                                        style="background-color:{{$comment->user()->get()->all()[0]->avatar}};"
+                                    >
                                         <p>{{str_limit($comment->user()->get()->all()[0]->username,1,'')}}</p>
                                     </div>    
                                     @endif
