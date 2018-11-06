@@ -29,21 +29,15 @@
                                 onclick="document.getElementById('video-player').pause()"
                             >
                                 <span class="icon-control fa fa-pause"></span
-                                ></button>
+                                >
+                            </button>
+                            
                             <button 
-                                id="btn-"
+                                id="btn-next"
                                 class="btn-control"
-                                onclick="document.getElementById('demo').play()"
                             >
-                                <span class="icon-control fa fa-step-forward"
-                                ></span></button>
-                            <button 
-                                id="btn-"
-                                class="btn-control"
-                                onclick="document.getElementById('demo').play()"
-                            >
-                                <span class="icon-control fa fa-"></span></bu
-                                tton>
+                                <span class="icon-control fa fa-step-forward"></span>
+                            </button>
                         </div>
                     </div>
                     <h1 class="video-play-title">{{$video->title}}</h1>
@@ -139,6 +133,16 @@
                 </div>
             </div>
             <div class="next-video-container">
+                @foreach($moreVideos as $v)
+                    <a href="{{route('play.video', $v->id)}}" 
+                    class="image-container"
+                    id="new-petition"
+                    hidden
+                >
+                </a>
+                @break
+                @endforeach
+
                 @forelse($moreVideos as $video)
                 <div class="next-video-play">
                     <div>
@@ -193,6 +197,10 @@
             
         //     $('#video-player').fullscreen();
         // });
+
+        $('#btn-next').on('click', function(){
+            $('#new-petition')[0].click();
+        }); 
 
         function play() {
             $('#btn-play').hide();

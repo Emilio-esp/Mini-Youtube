@@ -83,6 +83,7 @@ class VideoController extends Controller
      */
     public function playVideo($video_id)
     {
+        // dd($video_id);
         $video = Video::findOrFail($video_id);
         $moreVideos = Video::paginate(15)->whereNotIn('id', $video_id);
         $comments = Comment::where('video_id', $video->id)->get();
