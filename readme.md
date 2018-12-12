@@ -1,3 +1,10 @@
+# Mini-Youtube
+![video-gif](https://user-images.githubusercontent.com/15077902/49901048-98337b80-fe36-11e8-8947-5f1c0db967e0.gif)
+
+## Para descargar el proyecto
+* Clonar el repositorio
+* En la ruta del respositorio clonado ejecutar "composer install"
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
